@@ -181,3 +181,9 @@ header.border-b { background: #ffffff }
 /* Small visual tweaks to ensure links and buttons look similar */
 .bg-amber-400 { background: #f59e0b !important }
 .rounded-md { border-radius: 8px !important }
+
+header{
+    background: transparent;
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(200, 200, 200, 0.3);
+}
