@@ -1,0 +1,183 @@
+@font-face {
+    font-family: 'Satoshi';
+    src: url('../fonts/satoshi/Satoshi-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Satoshi';
+    src: url('../fonts/satoshi/Satoshi-Medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Satoshi';
+    src: url('../fonts/satoshi/Satoshi-Bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Satoshi';
+    src: url('../fonts/satoshi/Satoshi-Black.otf') format('opentype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --accent: #4b5563;
+    /* slate-600 */
+}
+
+.hero-mask {
+    clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+}
+
+/* Small utilities for project cards and background watermark */
+.proj-overlay {
+    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.0) 0%, rgba(0, 0, 0, 0.35) 60%, rgba(0, 0, 0, 0.6) 100%);
+}
+
+.card-accent {
+    transition: transform .28s ease, box-shadow .28s ease;
+}
+
+.card-accent:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(2, 6, 23, 0.35);
+}
+
+.watermark {
+    position: relative;
+    overflow: hidden;
+}
+
+.watermark::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('./assets/img/Logo.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 55%;
+    opacity: 0.04;
+    pointer-events: none;
+}
+
+/* Use Satoshi if available, fall back to system fonts */
+body {
+    font-family: 'Satoshi', Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+/* Layout helpers and overrides (coexist with Tailwind) */
+* { box-sizing: border-box }
+
+/* Header tweak to match design spacing */
+header.border-b { background: #ffffff }
+
+/* Hero layout overrides: use flex for predictable alignment */
+.hero { display: flex; align-items: center; gap: 40px; padding-top: 48px; padding-bottom: 180px; flex-wrap: nowrap; position: relative; overflow: visible }
+.hero-left { flex: 1 1 60% }
+.hero-left p.text-xs { color: #6b7280 }
+.hero-left h1, .hero-left .text-6xl { font-size: 120px; line-height: 0.86; font-weight: 900; color: #0b1220; margin: 0; letter-spacing: -2px }
+.hero-left p.mt-6 { color: #475569; font-size: 18px; max-width: 56rem }
+.hero-left .mt-8 { margin-top: 28px }
+
+/* Hero photo styling and mask - keep image upright and aligned */
+.hero-right { flex: 0 0 480px; display: block; position: relative }
+/* position image relatively */
+.hero-mask { position: relative; width: 420px; height: auto; overflow: visible; background: transparent; border-radius: 0; box-shadow: 0 14px 40px rgba(2,6,23,0.08) }
+.hero-mask img { display: block; width: 100%; height: auto; object-fit: contain }
+
+/* Position and style for the floating note */
+.hero-note { box-shadow: 0 10px 30px rgba(2,6,23,0.12); border-radius: 6px; position: absolute; right: 24px; top: 28%; }
+.hero-note p { margin: 0; color: #1f2937 }
+
+/* Remove previous overlap margin that caused image to appear tilted */
+.hero-mask { margin-bottom: 0 }
+
+/* Intro band: centered floating panel at bottom-center of hero */
+.intro-band { background: #4f6b85; color: #fff; padding: 36px; width: 86%; max-width: 1100px; position: absolute; left: 50%; transform: translateX(-50%); bottom: -90px; z-index: 20; border-radius: 4px; box-shadow: 0 8px 24px rgba(2,6,23,0.12) }
+.intro-band .container { max-width: 980px; background: transparent; padding: 0 }
+.intro-band p.text-xs { color: #e6b95a }
+.intro-band h2 { font-size: 22px; line-height: 1.25 }
+.intro-band p.mt-8 { opacity: 0.95 }
+
+/* hero-photo inside intro band - centered behind the band */
+.intro-band .hero-photo { position: absolute; left: 50%; transform: translateX(-50%); top: -140px; width: 420px; pointer-events: none; z-index: 0 }
+.intro-band .hero-photo img { width: 100%; height: auto; display: block; object-fit: contain }
+
+/* ensure hero-right placeholder doesn't collapse layout */
+.hero-right { position: relative }
+
+/* Make projects section darker and full width look */
+.bg-slate-900 { background: #07111a !important }
+.projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px }
+.card-accent { transition: transform .28s ease, box-shadow .28s ease }
+.card-accent:hover { transform: translateY(-10px); box-shadow: 0 18px 44px rgba(2,6,23,0.18) }
+.proj-overlay { position: absolute; inset: 0; pointer-events: none }
+
+/* Product grid adjustments */
+.product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px }
+.product-card img { display: block; width: 100%; height: 160px; object-fit: cover }
+
+/* Watermark subtle background inside CTA */
+.watermark { position: relative }
+.watermark::after { content: ''; position: absolute; inset: 0; background-image: url('../img/Logo.png'); background-repeat: no-repeat; background-position: center; background-size: 55%; opacity: 0.035; pointer-events: none }
+
+/* Responsive breakpoints to match design */
+@media (max-width: 1024px) {
+    .hero { flex-direction: row; gap: 24px }
+    .hero-left h1, .hero-left .text-6xl { font-size: 64px }
+    .hero-right { flex: 0 0 360px }
+    .hero-mask { width: 320px; }
+    .intro-band { bottom: -64px; width: 92% }
+    .intro-band .hero-photo { position: relative; float: right; width: 320px; margin-top: -120px; margin-right: 24px; z-index: 0 }
+    .product-grid { grid-template-columns: repeat(2, 1fr) }
+    .projects-grid { grid-template-columns: repeat(2, 1fr) }
+
+    .intro-band2 {
+        display: none;
+    }
+}
+
+@media (max-width: 680px) {
+    .hero { flex-direction: column; align-items: flex-start; gap: 18px }
+    .hero-left h1, .hero-left .text-6xl { font-size: 40px }
+    .hero { padding-top: 28px }
+    .hero-right { width: 100%; display: block }
+    .hero-mask { position: static; width: 100%; max-width: 420px; margin: 0 auto 8px auto }
+    .hero-note { position: static; margin-top: 12px }
+    .intro-band { position: static; transform: none; width: 100%; padding: 28px; margin-top: 20px }
+    .intro-band .hero-photo { position: static; width: 100%; max-width: 420px; margin: 16px auto 0; z-index: auto }
+    .product-grid { grid-template-columns: 1fr }
+    .projects-grid { grid-template-columns: 1fr }
+    .hero-left .mt-8 { margin-top:16px }
+
+    .intro-band2 {
+        display: none;
+        position: static !important;
+        transform: none;
+        width: 100%;
+        padding: 28px;
+        margin-top: 20px
+    }
+
+    .intro-band2 img {
+        position: static;
+        width: 100%;
+        max-width: 420px;
+        margin: 16px auto 0;
+        z-index: auto;
+    }
+}
+
+/* Small visual tweaks to ensure links and buttons look similar */
+.bg-amber-400 { background: #f59e0b !important }
+.rounded-md { border-radius: 8px !important }
