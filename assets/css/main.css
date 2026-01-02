@@ -182,6 +182,22 @@ header.border-b { background: #ffffff }
 .bg-amber-400 { background: #f59e0b !important }
 .rounded-md { border-radius: 8px !important }
 
+/* Reveal animation for sections */
+.reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity .6s ease, transform .6s ease;
+    will-change: opacity, transform;
+    z-index: 1;
+}
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Optional smaller reveal for subtle elements */
+.reveal.small { transform: translateY(8px); transition-duration: .5s }
+
 header{
     background: transparent;
     backdrop-filter: blur(8px);
