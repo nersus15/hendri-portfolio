@@ -50,6 +50,13 @@ document.addEventListener('DOMContentLoaded', function(){
     // Fade-in on scroll for elements with `.fade-in` class
     const fades = Array.from(document.querySelectorAll('.fade-in'));
     if(fades.length){
+        // Auto-assign staggered data-delay attributes when not present
+        fades.forEach((el, i) => {
+            if(!el.dataset.delay){
+                const delay = Math.min(i * 80, 480); // cap at 480ms
+                el.dataset.delay = `${delay}ms`;
+            }
+        });
         const ioFade = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if(entry.isIntersecting){
