@@ -203,3 +203,19 @@ header{
     backdrop-filter: blur(8px);
     border-bottom: 1px solid rgba(200, 200, 200, 0.3);
 }
+
+/* Fade-in utility (use as a Tailwind-like class: `fade-in`) */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+/* Hidden state for elements that will fade in on scroll */
+.fade-in {
+    opacity: 0;
+    transform: translateY(6px);
+    will-change: opacity, transform;
+}
+/* Apply animation when element becomes visible (added by JS) */
+.fade-in.is-visible {
+    animation: fadeIn 700ms ease forwards;
+}

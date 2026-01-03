@@ -46,4 +46,22 @@ document.addEventListener('DOMContentLoaded', function(){
     }, { threshold: 0.12 });
 
     sections.forEach(s => io.observe(s));
+
+    // Fade-in on scroll for elements with `.fade-in` class
+    const fades = Array.from(document.querySelectorAll('.fade-in'));
+    if(fades.length){
+        const ioFade = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting){
+                    const el = entry.target;
+                    const delay = el.dataset.delay;
+                    if(delay) el.style.animationDelay = delay;
+                    el.classList.add('is-visible');
+                    observer.unobserve(el);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+
+        fades.forEach(f => ioFade.observe(f));
+    }
 });
